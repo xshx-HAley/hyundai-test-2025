@@ -3,6 +3,7 @@ package hyundai.web.admin.controller;
 import hyundai.web.admin.dto.AdminUserUpdateRequest;
 import hyundai.web.admin.service.AdminUserService;
 import hyundai.web.global.response.ApiResponse;
+import hyundai.web.user.dto.UserSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,9 @@ public class AdminUserController {
     private final AdminUserService adminUserService;
 
     @GetMapping
-    public ApiResponse<Object> findAll(Pageable pageable) {
-        return ApiResponse.success(adminUserService.findAll(pageable));
+    public ApiResponse<Object> findAll(@ModelAttribute UserSearchCondition condition,
+                                       Pageable pageable) {
+        return ApiResponse.success(adminUserService.findAll(condition, pageable));
     }
 
     @PatchMapping("/{userId}")
