@@ -1,0 +1,55 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+*.iws
+out/
+# === OS/IDE 환경 파일 ===
+.DS_Store
+Thumbs.db
+
+# === QueryDSL Q class 생성 경로 ===
+**/generated/
+
+# === 테스트 결과 ===
+test-output/
+surefire-reports/
+
+# === Java 관련 ===
+*.class
+*.jar
+*.war
+*.ear
