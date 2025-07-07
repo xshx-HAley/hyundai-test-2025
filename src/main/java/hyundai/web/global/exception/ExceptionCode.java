@@ -10,8 +10,8 @@ public enum ExceptionCode {
 
     //BAD_REQUEST
     IS_EXIST_SOCIAL_NUMBER("IS_EXIST_SOCIAL_NUMBER", "이미 등록된 주민등록번호입니다."),
-    IS_EXIST_USER_ID("IS_EXIST_USER_ID", "이미 등록된 아이디입니다.")
-
+    IS_EXIST_USER_ID("IS_EXIST_USER_ID", "이미 등록된 아이디입니다."),
+    PASSWORD_NOT_MATCHED("PASSWORD_NOT_MATCHED","아이디 또는 비밀번호가 올바르지 않습니다.")
     ;
 
     private final String code;

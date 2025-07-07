@@ -1,6 +1,8 @@
 package hyundai.web.user.service;
 
 import hyundai.web.global.crypto.PasswordEncryptor;
+import hyundai.web.global.exception.BaseException;
+import hyundai.web.global.exception.ExceptionCode;
 import hyundai.web.global.security.JwtTokenProvider;
 import hyundai.web.user.domain.UserEntity;
 import hyundai.web.user.dto.LoginRequest;
@@ -16,11 +18,11 @@ public class LoginService {
     private final PasswordEncryptor passwordEncryptor;
     private final JwtTokenProvider jwtTokenProvider;
     public LoginResponse login(LoginRequest request) {
-        UserEntity user = userRepository.findByUserId(request.userId())
-                .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
+        UserEntity user = userRepository.findByUserIdAndIsDeleted(request.userId(), Boolean.FALSE)
+                .orElseThrow(() -> new BaseException(ExceptionCode.USER_NOT_FOUND));
 
         if (!passwordEncryptor.matches(request.password(), user.getPassword())) {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다.");
+            throw new BaseException(ExceptionCode.PASSWORD_NOT_MATCHED);
         }
 
         String token = jwtTokenProvider.generateToken(user.getUserId());

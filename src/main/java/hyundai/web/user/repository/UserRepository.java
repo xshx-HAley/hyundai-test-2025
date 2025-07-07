@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, UserQue
     Boolean existsBySocialNumber(String socialNumber);
     Boolean existsByUserId(String socialNumber);
     Optional<UserEntity> findByUserId(String userId);
+    List<UserEntity> findAllByUserIdIn(List<String> userIds);
+    Optional<UserEntity> findByUserIdAndIsDeleted(String userId, Boolean isDeleted);
 }

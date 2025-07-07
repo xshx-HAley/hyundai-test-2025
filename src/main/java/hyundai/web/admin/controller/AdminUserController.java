@@ -6,7 +6,6 @@ import hyundai.web.global.response.ApiResponse;
 import hyundai.web.user.dto.UserSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,22 +15,21 @@ import org.springframework.web.bind.annotation.*;
 public class AdminUserController {
     private final AdminUserService adminUserService;
 
-    @GetMapping
+    @GetMapping("")
     public ApiResponse<Object> findAll(@ModelAttribute UserSearchCondition condition,
                                        Pageable pageable) {
-        return ApiResponse.success(adminUserService.findAll(condition, pageable));
+        return ApiResponse.success(adminUserService.findAllUserBySearchCondition(condition, pageable));
     }
 
-    @PatchMapping("/{userId}")
-    public ApiResponse<Void> updateUser(@PathVariable String userId,
-                                        @RequestBody AdminUserUpdateRequest request) {
-        adminUserService.updateUser(userId, request);
+    @PatchMapping("")
+    public ApiResponse<Void> updateUser(@RequestBody AdminUserUpdateRequest request) {
+        adminUserService.updateUser(request);
         return ApiResponse.success();
     }
 
-    @DeleteMapping("/{userId}")
-    public ApiResponse<Void> deleteUser(@PathVariable String userId) {
-        adminUserService.deleteUser(userId);
+    @DeleteMapping("/{userSequence}")
+    public ApiResponse<Void> deleteUser(@PathVariable Long userSequence) {
+        adminUserService.deleteUser(userSequence);
         return ApiResponse.success();
     }
 }

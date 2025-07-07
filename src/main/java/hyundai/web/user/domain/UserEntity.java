@@ -3,6 +3,7 @@ package hyundai.web.user.domain;
 import hyundai.web.global.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -37,4 +38,21 @@ public class UserEntity extends BaseTimeEntity {
     @Embedded
     private Address address;
 
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private Boolean isDeleted = false;
+
+
+    public void updateAddress(Address address){
+        this.address = address;
+    }
+
+
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
+    public void updateIsDelete(Boolean value){
+        this.isDeleted = value;
+    }
 }

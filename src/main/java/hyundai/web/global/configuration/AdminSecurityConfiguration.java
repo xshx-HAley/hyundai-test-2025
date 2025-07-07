@@ -1,6 +1,7 @@
 package hyundai.web.global.configuration;
 
 import hyundai.web.global.crypto.PasswordEncryptor;
+import hyundai.web.global.security.CompositeUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 public class AdminSecurityConfiguration {
-
-    private final PasswordEncryptor passwordEncryptor;
+    private final CompositeUserDetailsService compositeUserDetailsService;
     @Bean
     @Order(1)
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
@@ -29,21 +29,9 @@ public class AdminSecurityConfiguration {
                         .anyRequest().hasRole("ADMIN")
                 )
                 .httpBasic(Customizer.withDefaults()) // ✅ Basic Auth
+                .userDetailsService(compositeUserDetailsService)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
-    }
-
-
-    /** 관리자 계정 임시 설정 **/
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncryptor.encode("1212"))
-                        .roles("ADMIN")
-                        .build()
-        );
     }
 }

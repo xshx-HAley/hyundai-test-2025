@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 public class UserInformation {
-
     @Getter
     @AllArgsConstructor
     @SuperBuilder
@@ -14,26 +13,31 @@ public class UserInformation {
         private String userId;
         private String name;
         private String phone;
-        private String region;
+        private String sido;
     }
 
     @Getter
     @SuperBuilder
     public static class All extends Basic {
+        private Long sequence;
         private String socialNumber;
-
-        public All(String userId, String name, String phone, String region, String socialNumber) {
-            super(userId, name, phone, region); // 상위 클래스 초기화
-            this.socialNumber = socialNumber;
-        }
+        private String sigungu;
+        private String eupmyeondong;
+        private String detail;
+        private Boolean isDeleted;
 
         public static All from(UserEntity user) {
             return All.builder()
+                    .sequence(user.getId())
                     .userId(user.getUserId())
                     .name(user.getName())
                     .phone(user.getPhone())
-                    .region(user.getAddress() != null ? user.getAddress().getSido() : null)
+                    .sido(user.getAddress() != null ? user.getAddress().getSido() : null)
+                    .sigungu(user.getAddress() != null ? user.getAddress().getSigungu() : null)
+                    .eupmyeondong(user.getAddress() != null ? user.getAddress().getEupmyeondong() : null)
+                    .detail(user.getAddress() != null ? user.getAddress().getDetail() : null)
                     .socialNumber(user.getSocialNumber())
+                    .isDeleted(user.getIsDeleted())
                     .build();
         }
     }
