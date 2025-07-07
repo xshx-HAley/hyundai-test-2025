@@ -30,6 +30,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<querydsl.version>5.0.0</querydsl.version>
+		<resilience4jVersion>2.2.0</resilience4jVersion>
 	</properties>
 	<profiles>
 		<profile>
@@ -112,6 +113,45 @@
 			<version>${querydsl.version}</version>
 			<classifier>jakarta</classifier>
 			<scope>provided</scope>
+		</dependency>
+		<!-- RabbitMQ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-circuitbreaker</artifactId>
+			<version>${resilience4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-ratelimiter</artifactId>
+			<version>${resilience4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-retry</artifactId>
+			<version>${resilience4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-bulkhead</artifactId>
+			<version>${resilience4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-cache</artifactId>
+			<version>${resilience4jVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-timelimiter</artifactId>
+			<version>${resilience4jVersion}</version>
 		</dependency>
 	</dependencies>
 
