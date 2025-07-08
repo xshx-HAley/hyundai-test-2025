@@ -1,0 +1,39 @@
+services:
+  app:
+    container_name: hyundai-app
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+      - rabbitmq
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    command: sh -c "sleep 10 && java -jar /app.jar"
+
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: hyundai_test
+      MARIADB_USER: root_h
+      MARIADB_PASSWORD: root_h
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+
+volumes:
+  mariadb-data:
+
+networks:
+  backend:
+    driver: bridge
