@@ -1,4 +1,4 @@
-package hyundai.web.admin.service;
+package hyundai.web.message.listener;
 
 import hyundai.web.admin.dto.MessagePayload;
 import lombok.RequiredArgsConstructor;

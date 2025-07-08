@@ -22,15 +22,6 @@ public class RabbitConfiguration {// 1) 사용할 Exchange 이름
     public static final String KAKAO_ROUTING_KEY = "message.kakao";
     public static final String SMS_ROUTING_KEY   = "message.sms";
 
-    @Bean
-    public RateLimiter kakaoRateLimiter() {
-        return RateLimiter.of("kakao", RateLimiterConfig.custom()
-                .limitForPeriod(100)
-                .limitRefreshPeriod(Duration.ofMinutes(1))
-                .timeoutDuration(Duration.ofSeconds(5))
-                .build()
-        );
-    }
     // --- Exchange ---
     @Bean
     public TopicExchange messageExchange() {

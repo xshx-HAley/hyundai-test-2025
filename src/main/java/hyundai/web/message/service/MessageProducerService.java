@@ -1,4 +1,4 @@
-package hyundai.web.admin.service;
+package hyundai.web.message.service;
 
 import hyundai.web.admin.dto.MessagePayload;
 import hyundai.web.message.configuration.RabbitConfiguration;

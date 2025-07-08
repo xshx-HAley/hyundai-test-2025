@@ -32,6 +32,7 @@
 		<querydsl.version>5.0.0</querydsl.version>
 		<resilience4jVersion>2.2.0</resilience4jVersion>
 	</properties>
+
 	<profiles>
 		<profile>
 			<id>local</id>
@@ -43,7 +44,25 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+			</properties>
+		</profile>
 	</profiles>
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Cloud BOM 설정 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2023.0.1</version> <!-- Spring Boot 3.2.x 이상에 대응 -->
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,6 +71,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -152,6 +175,11 @@
 			<groupId>io.github.resilience4j</groupId>
 			<artifactId>resilience4j-timelimiter</artifactId>
 			<version>${resilience4jVersion}</version>
+		</dependency>
+		<!--Feign client-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 	</dependencies>
 
