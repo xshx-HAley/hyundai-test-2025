@@ -44,22 +44,6 @@ public class RabbitConfiguration {// 1) 사용할 Exchange 이름
                 .build();
     }
 
-    // --- Bindings ---
-    @Bean
-    public Binding kakaoBinding(Queue kakaoQueue, TopicExchange messageExchange) {
-        return BindingBuilder
-                .bind(kakaoQueue)
-                .to(messageExchange)
-                .with(KAKAO_ROUTING_KEY);
-    }
-
-    @Bean
-    public Binding smsBinding(Queue smsQueue, TopicExchange messageExchange) {
-        return BindingBuilder
-                .bind(smsQueue)
-                .to(messageExchange)
-                .with(SMS_ROUTING_KEY);
-    }
 
     /**
      * 메시지를 JSON으로 직렬화/역직렬화하는 MessageConverter
