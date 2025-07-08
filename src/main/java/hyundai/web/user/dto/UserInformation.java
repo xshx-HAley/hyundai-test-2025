@@ -36,7 +36,6 @@ public class UserInformation {
                     .sigungu(user.getAddress() != null ? user.getAddress().getSigungu() : null)
                     .eupmyeondong(user.getAddress() != null ? user.getAddress().getEupmyeondong() : null)
                     .detail(user.getAddress() != null ? user.getAddress().getDetail() : null)
-                    .socialNumber(user.getSocialNumber())
                     .isDeleted(user.getIsDeleted())
                     .build();
         }

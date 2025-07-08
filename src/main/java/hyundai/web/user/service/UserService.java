@@ -39,6 +39,7 @@ public class UserService {
                 .socialNumber(aesEncryptor.encrypt(request.socialNumber()))
                 .phone(request.phone())
                 .address(request.toAddress())
+                .isDeleted(Boolean.FALSE)
                 .build();
 
 
