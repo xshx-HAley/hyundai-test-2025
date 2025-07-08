@@ -22,12 +22,13 @@ public class UserEntity extends BaseTimeEntity {
 
     @Column(nullable = false, length = 50)
     private String userId;
-
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, length = 20)
     private String name;
+
+    private Integer age;
 
     @Column(nullable = false, length = 100)
     private String socialNumber;

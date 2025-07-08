@@ -1,14 +1,12 @@
 package hyundai.web.message.configuration;
 
-import io.github.resilience4j.ratelimiter.RateLimiter;
-import io.github.resilience4j.ratelimiter.RateLimiterConfig;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.Duration;
 
 @Configuration
 public class RabbitConfiguration {// 1) 사용할 Exchange 이름
@@ -63,13 +61,25 @@ public class RabbitConfiguration {// 1) 사용할 Exchange 이름
                 .with(SMS_ROUTING_KEY);
     }
 
-    // --- RabbitTemplate (메시지 발송용) ---
-    //    필요하다면 Jackson2JsonMessageConverter 등 컨버터 설정도 가능
+    /**
+     * 메시지를 JSON으로 직렬화/역직렬화하는 MessageConverter
+     */
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    public MessageConverter jsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    /**
+     * RabbitTemplate 에 JSON 컨버터를 설정
+     */
+    @Bean
+    public RabbitTemplate rabbitTemplate(
+            ConnectionFactory connectionFactory,
+            MessageConverter jsonMessageConverter
+    ) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        // JSON 직렬화를 쓰고 싶다면:
-        // template.setMessageConverter(new Jackson2JsonMessageConverter());
+        template.setMessageConverter(jsonMessageConverter);
         return template;
     }
+
 }

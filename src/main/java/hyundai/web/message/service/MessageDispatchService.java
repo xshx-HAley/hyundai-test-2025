@@ -30,8 +30,8 @@ public class MessageDispatchService {
                 .findByAgeBetweenAndIsDeletedFalse(ageFrom, ageTo)
                 .stream()
                 .map(user -> new MessagePayload.Kakao(
-                        user.getPhone(),
                         user.getName(),
+                        user.getPhone(),
                         content
                 ))
                 .toList();

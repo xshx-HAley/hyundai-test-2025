@@ -1,10 +1,16 @@
 package hyundai.web.message.exception;
 
 import feign.Response;
+import feign.codec.Decoder;
 import feign.codec.ErrorDecoder;
 import hyundai.web.global.exception.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import org.springframework.cloud.openfeign.support.SpringDecoder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

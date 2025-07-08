@@ -2,6 +2,7 @@ package hyundai.web.message.client;
 
 import hyundai.web.message.configuration.KakaoFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,5 +15,6 @@ import java.util.Map;
 )
 public interface KakaoFeignClient {
     @PostMapping(value = "/kakaotalk-messages", consumes = "application/json")
-    void sendMessage(@RequestBody Map<String,String> payload);
+    ResponseEntity<Void> sendMessage(@RequestBody Map<String,String> payload);
 }
+

@@ -53,11 +53,10 @@
 	</profiles>
 	<dependencyManagement>
 		<dependencies>
-			<!-- Spring Cloud BOM 설정 -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2023.0.1</version> <!-- Spring Boot 3.2.x 이상에 대응 -->
+				<version>2025.0.0</version> <!-- Spring Boot 3.2.x 이상에 대응 -->
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

@@ -1,24 +1,19 @@
 package hyundai.web.message.configuration;
 
-import feign.Client;
 import feign.Logger;
-import feign.RequestInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.Base64;
 
 @Configuration
 @EnableFeignClients
@@ -28,16 +23,6 @@ public class FeignConfiguration {
     private static final String ACTIVE_PROFILE_LOCAL = "[local]";
     public static final String APPLICATION_FORM_URLENCODED_UTF8_VALUE =
             MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8";
-
-    /**
-     * content-type 헤더를 UTF-8로 명시하기 위한 설정
-     * @return
-     */
-    @Bean
-    public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> requestTemplate
-                .header(HttpHeaders.CONTENT_TYPE, APPLICATION_FORM_URLENCODED_UTF8_VALUE);
-    }
 
     /**
      * feign 로깅처리 레벨설정

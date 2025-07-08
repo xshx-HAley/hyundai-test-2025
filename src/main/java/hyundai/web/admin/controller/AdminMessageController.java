@@ -1,5 +1,6 @@
 package hyundai.web.admin.controller;
 
+import hyundai.web.global.response.ApiResponse;
 import hyundai.web.message.service.MessageDispatchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
