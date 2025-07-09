@@ -22,7 +22,7 @@ services:
       MARIADB_USER: root_h
       MARIADB_PASSWORD: root_h
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
