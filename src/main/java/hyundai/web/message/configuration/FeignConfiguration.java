@@ -32,46 +32,4 @@ public class FeignConfiguration {
     Logger.Level feignLogLevel(){
         return Logger.Level.BASIC;
     }
-
-    /**
-     * 임시 테스트용 - 개발/로컬에서만 SSL 인증서 없이 동작 하도록 SSL 인증서 검증을 우회하여, 모든 HTTPS 연결을 신뢰하도록 설정하는 SSLSocketFactory를 생성
-     *
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    public SSLSocketFactory getSSLSocketFactory() {
-        try {
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, new TrustManager[]{new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                }
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                }
-            }}, new SecureRandom());
-
-            return sslContext.getSocketFactory();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-//    /**
-//     * 로컬 서버의 SSL Disable 설정
-//     * @return
-//     */
-//    @Bean
-//    public Client getFeignClientDefaultByActiveProfile() {
-//        // todo: parkhoc 요기 바꿔야함
-//        return new Client.Default(getSSLSocketFactory(), new NoopHostnameVerifier());
-////        if(StringUtil.equals(Arrays.toString(environment.getActiveProfiles()), ACTIVE_PROFILE_LOCAL)) {
-////            //Feign SSL Disable
-////            return new Client.Default(getSSLSocketFactory(), new NoopHostnameVerifier());
-////        } else {
-////            return new Client.Default(null, null);
-////        }
-//    }
 }

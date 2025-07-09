@@ -1,6 +1,7 @@
 package hyundai.web.message.service;
 
 import hyundai.web.admin.dto.MessagePayload;
+import hyundai.web.global.util.PhoneNumberFormatter;
 import hyundai.web.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class MessageDispatchService {
                 .stream()
                 .map(user -> new MessagePayload.Kakao(
                         user.getName(),
-                        user.getPhone(),
+                        PhoneNumberFormatter.format(user.getPhone()),
                         content
                 ))
                 .toList();

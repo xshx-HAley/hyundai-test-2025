@@ -40,6 +40,7 @@ public class MessageListener {
     }
     @RabbitListener(queues = RabbitConfiguration.KAKAO_QUEUE)
     public void handle(MessagePayload.Kakao payload) {
+        log.info(">>> 메시지 수신 완료: {}", payload.getPhone());
         // 메시지 포맷팅: 첫줄 자동 삽입
         String fullMessage = payload.getUserName() +
                 "님, 안녕하세요. 현대 오토에버입니다.\n" + payload.getMessage();
@@ -63,7 +64,6 @@ public class MessageListener {
             } else {
                 log.info("카카오톡 발송 성공 (전화번호: {})", payload.getPhone());
             }
-
         } catch (RequestNotPermitted rl) {
             log.warn("카카오톡 Rate limit 초과 → SMS 폴백으로 전환");
             fallbackSms(payload, fullMessage);
